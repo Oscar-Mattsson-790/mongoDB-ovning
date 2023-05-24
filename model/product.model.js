@@ -1,6 +1,8 @@
 const Products = require("./product.schema.js");
 
 async function getProductById(id) {
+  // SELECT * FROM Products WHERE id = id
+
   const product = await Products.findOne({ id });
   return product;
 }

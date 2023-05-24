@@ -2,13 +2,14 @@ const { Router } = require("express");
 const router = new Router();
 
 const { generateOrderNr, generateETA } = require("../utils/utils");
-const { createOrder } = require("../model/order.model");
+const { createOrder, getOrder } = require("../model/order.model");
 const { getProducts } = require("../model/product.model");
 
 router.get("/", async (req, res) => {
   try {
+    const order = await getOrder();
     const products = await getProducts();
-    res.json({ success: true, product: products });
+    res.json({ success: true, product: order });
   } catch (error) {
     res.json({ success: false, message: error });
   }
